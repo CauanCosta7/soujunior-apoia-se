@@ -1,0 +1,21 @@
+# Validação — 23/09/2026
+
+Ambiente local: Windows, Node 22.15.1, Chromium do Playwright.
+
+- `npm install`: concluído; auditoria npm inicial sem vulnerabilidades reportadas.
+- `npm run build`: TypeScript estrito e Vite concluídos.
+- `npm test`: 4 testes aprovados (15,8 s na execução registrada).
+- Comparação original/React em 390, 768 e 1440 px: textos, URLs, dimensões e comparação de pixels dentro de 0,5% de tolerância; sem overflow horizontal do documento.
+- Interações: tema após reload, menu e Escape com retorno de foco, seleção de valor, FAQ exclusivo, navegação dos dois carrosséis e ausência de faixa duplicada extra após StrictMode.
+- Capturas: `preview-390.png`, `preview-768.png` e `preview-1440.png`.
+- Vercel: build remoto finalizado com estado READY; produção em https://soujunior-apoia-se.vercel.app.
+
+## Limites e próximos testes manuais
+
+A comparação visual automatizada usa movimento reduzido para estabilidade; o teste de interações começa com movimento habilitado. Dependências externas (fontes e fotos) podem causar indisponibilidade ou diferenças futuras. O teste confirma os destinos dos links, sem concluir pagamentos nem entrar em grupos.
+
+Ainda executar: contraste de todos os estados em ambos os temas, leitor de tela, zoom a 200%, dispositivos físicos, avaliação de compreensão com pessoas e onboarding realizado por outro integrante. Não se declara certificação WCAG nem nota de Lighthouse.
+
+As fontes dos números de impacto, autorizações de imagem e evidências de participação não são verificáveis apenas pelo código; consultar `EDITAL.md`.
+
+Verificação pública adicional: resposta HTTP 200, todas as imagens carregadas e nenhum erro de JavaScript; captura de produção em hero-preview.jpg.

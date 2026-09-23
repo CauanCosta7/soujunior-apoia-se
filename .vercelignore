@@ -1,0 +1,10 @@
+node_modules
+.git
+.openai
+docs
+tests
+scripts
+test-results
+playwright-report
+site-bundle.tar.gz
+README-CODEX.md

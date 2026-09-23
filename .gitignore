@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.vercel/
+.openai/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+site-bundle.tar.gz
+.vercel
