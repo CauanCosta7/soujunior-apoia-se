@@ -1,0 +1,181 @@
+/* Explicit foreground/background pairs prevent inherited hover conflicts. */
+[data-theme="dark"] .btn,
+[data-theme="dark"] .final .btn {
+  background: #273fc4 !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .btn:is(:hover, :focus-visible),
+[data-theme="dark"] .final .btn:is(:hover, :focus-visible) {
+  background: #344cda !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .hero-primary,
+[data-theme="dark"] .nav-cta {
+  background: var(--yellow) !important;
+  color: var(--deep) !important;
+}
+[data-theme="dark"] .hero-primary:is(:hover, :focus-visible),
+[data-theme="dark"] .nav-cta:is(:hover, :focus-visible) {
+  background: #ffe17a !important;
+  color: var(--deep) !important;
+}
+[data-theme="dark"] .hero-manifesto .hero-secondary {
+  background: transparent !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .hero-manifesto .hero-secondary:is(:hover, :focus-visible) {
+  background: #fff !important;
+  color: var(--deep) !important;
+  border-color: #fff;
+}
+[data-theme="dark"] .text-in:hover .title-word,
+[data-theme="dark"] .type-line:hover .typed-copy,
+[data-theme="dark"] .route-step:hover h3,
+[data-theme="dark"] .faq-entry:hover .faq-question {
+  color: var(--yellow) !important;
+}
+[data-theme="dark"] .giving-action .amount {
+  border-color: #7888bc !important;
+}
+[data-theme="dark"] .giving-action .amount:is(:hover, :focus-visible) {
+  background: #263466 !important;
+  color: #fff !important;
+  border-color: var(--yellow) !important;
+}
+[data-theme="dark"] .giving-action .amount[aria-pressed="true"] {
+  background: var(--yellow) !important;
+  color: var(--deep) !important;
+  border-color: var(--yellow) !important;
+}
+[data-theme="dark"] .metric:nth-child(4) {
+  --tile: #5148cc;
+}
+[data-theme="dark"] :is(a, button, summary):focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 5px;
+  box-shadow: 0 0 0 2px #080d24;
+}
+[data-theme="dark"] .foot-link:is(:hover, :focus-visible),
+[data-theme="dark"] .foot-link:is(:hover, :focus-visible) strong {
+  color: var(--yellow);
+}
+.giving-note b {
+  font-family: ui-monospace, "Cascadia Code", "Courier New", monospace;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  border: 1px solid rgba(10, 22, 98, 0.15);
+  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.16);
+}
+[data-theme="dark"] .giving-note b {
+  background: var(--yellow) !important;
+  color: var(--deep) !important;
+}
+
+/* Individual translate leaves the existing fan-out transform untouched. */
+.spend-card:nth-child(n) {
+  --card-accent: #0e14bf;
+  --card-order: 0;
+  transition:
+    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease !important;
+}
+.spend-card:nth-child(2) {
+  --card-order: 1;
+}
+.spend-card:nth-child(3) {
+  --card-order: 2;
+}
+.spend-card:nth-child(4) {
+  --card-order: 3;
+}
+[data-theme="dark"] .spend-card:nth-child(n) {
+  --card-accent: #facc15;
+}
+.spend-title .ui-icon {
+  transition:
+    rotate 0.4s ease,
+    scale 0.4s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .spend-card:nth-child(n):hover {
+    translate: 0 -7px;
+    border-color: var(--card-accent) !important;
+    box-shadow:
+      0 14px 28px rgba(10, 22, 98, 0.16),
+      inset 0 2px var(--card-accent);
+  }
+  [data-theme="dark"] .spend-card:nth-child(n):hover {
+    box-shadow:
+      0 14px 28px rgba(0, 0, 0, 0.28),
+      inset 0 2px var(--card-accent);
+  }
+  .spend-card:hover .ui-icon {
+    rotate: -6deg;
+    scale: 1.08;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spend-landscape.is-visible .spend-title .ui-icon {
+    animation: resource-greeting 2.8s cubic-bezier(0.22, 0.8, 0.25, 1) both;
+    animation-delay: calc(var(--card-order) * 140ms);
+  }
+  .spend-landscape.is-visible .spend-card {
+    animation: resource-glow 3.2s ease both;
+    animation-delay: calc(var(--card-order) * 140ms);
+  }
+  .giving-note.viewport-reveal.in b {
+    animation: contribution-greeting 1.8s ease both;
+  }
+}
+@keyframes resource-greeting {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  35% {
+    translate: 0 -6px;
+  }
+  65% {
+    translate: 0 2px;
+  }
+}
+@keyframes resource-glow {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  45% {
+    filter: brightness(1.12);
+  }
+}
+@keyframes contribution-greeting {
+  0%,
+  100% {
+    rotate: 0deg;
+    scale: 1;
+  }
+  40% {
+    rotate: -8deg;
+    scale: 1.08;
+  }
+  70% {
+    rotate: 3deg;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spend-card:nth-child(n),
+  .spend-title .ui-icon,
+  .giving-note b {
+    animation: none !important;
+    transition: none !important;
+    translate: none !important;
+    rotate: none !important;
+    scale: none !important;
+  }
+}
+[data-theme="dark"] .route-step:nth-child(2) .route-dot {
+  background: #5148cc;
+}

@@ -4,7 +4,7 @@ A página é uma aplicação estática React com TypeScript estrito. Vite serve 
 
 ## Componentes e estilos
 
-Cada seção é um componente TSX real, sem iframe e sem `dangerouslySetInnerHTML`. `App` apenas organiza as seções. A marcação, as classes e os textos foram preservados. Os arquivos CSS são importados na ordem `base`, `interactions`, `direction`, `v3`; essa cascata é parte do visual original. A redundância dos estilos herdados foi mantida para evitar regressão nesta migração.
+Cada seção é um componente TSX real, sem iframe e sem `dangerouslySetInnerHTML`. `App` apenas organiza as seções. A marcação, as classes e os textos foram preservados. Os arquivos CSS são importados na ordem `base`, `interactions`, `direction`, `v3`, `refinements`; essa cascata é parte do visual original. A redundância dos estilos herdados foi mantida para evitar regressão nesta migração.
 
 ## Interações e ciclo de vida
 
@@ -27,3 +27,5 @@ Links de nova aba preservam `rel="noopener"`. Não há segredos no cliente. Não
 ## Modelo de integração contínua
 
 A configuração de GitHub Actions está em docs/github-actions-quality.yml como modelo inativo. A autenticação de publicação não possui a permissão workflow. Para ativar CI, um mantenedor autorizado pode mover esse arquivo para .github/workflows/quality.yml pelo GitHub. O build e os testes continuam disponíveis localmente.
+
+A camada `refinements` reúne os ajustes solicitados após a migração: pares explícitos de cores, seleção, foco e microinterações. Os movimentos extras de transparência duram até 3,62 segundos por entrada e não são loops contínuos. A translação de hover usa a propriedade individual `translate` para não disputar o `transform` de abertura dos cards.

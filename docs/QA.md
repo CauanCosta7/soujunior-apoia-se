@@ -19,3 +19,5 @@ Ainda executar: contraste de todos os estados em ambos os temas, leitor de tela,
 As fontes dos números de impacto, autorizações de imagem e evidências de participação não são verificáveis apenas pelo código; consultar `EDITAL.md`.
 
 Verificação pública adicional: resposta HTTP 200, todas as imagens carregadas e nenhum erro de JavaScript; captura de produção em hero-preview.jpg.
+
+Atualização: revisão de tema escuro e microinterações concluída com 7 testes aprovados. Consulte DARK-MODE.md para escopo, estados verificados e limitações.

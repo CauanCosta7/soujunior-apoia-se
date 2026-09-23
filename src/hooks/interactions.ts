@@ -610,6 +610,7 @@ export function initializeInteractions(root: HTMLElement) {
     const spendObserver = observe(
       (entries) => {
         spendVisible = entries.some((entry) => entry.isIntersecting);
+        spendLandscape.classList.toggle("is-visible", spendVisible);
         scheduleSpendTimer();
       },
       { threshold: 0.25 },
@@ -617,6 +618,7 @@ export function initializeInteractions(root: HTMLElement) {
     spendObserver.observe(spendLandscape);
   } else {
     spendVisible = true;
+    spendLandscape?.classList.add("is-visible");
   }
   on(compactTransparency, "change", () => {
     showSpend(0, "auto");
@@ -700,7 +702,7 @@ export function initializeInteractions(root: HTMLElement) {
           });
       });
       const reveals = document.querySelectorAll<HTMLElement>(
-        ".reveal, .hero-copy, .test-track, .source-link, .funding-heading, .funding-bottom, .faq-intro, .faq-entry, .final-inner > div, .final-mascot",
+        ".reveal, .hero-copy, .test-track, .source-link, .funding-heading, .funding-bottom, .faq-intro, .faq-entry, .final-inner > div, .final-mascot, .giving-note",
       );
       reveals.forEach((element) => {
         element.classList.add("viewport-reveal");
