@@ -10,7 +10,7 @@
 ![Vite](https://img.shields.io/badge/Vite-6-646cff?logo=vite&logoColor=white)
 ![Licença](https://img.shields.io/badge/Licença-MIT-22c55e)
 
-[**Acesse o site**](https://soujunior-apoia-se.vercel.app) · [Campanha oficial](https://apoia.se/soujunior) · [Como executar](#comece-em-poucos-passos) · [Arquitetura](docs/ARCHITECTURE.md) · [Conferência do edital](docs/EDITAL.md)
+[**Acesse o site**](https://soujunior-apoia-se.vercel.app) · [Código no GitHub](https://github.com/CauanCosta7/soujunior-apoia-se) · [Campanha oficial](https://apoia.se/soujunior) · [Como executar](#comece-em-poucos-passos) · [Arquitetura](docs/ARCHITECTURE.md) · [Conferência do edital](docs/EDITAL.md)
 
 </div>
 

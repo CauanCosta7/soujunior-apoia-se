@@ -30,7 +30,7 @@ README é critério de desempate no texto recebido. Documentação clara ajuda, 
 
 ## Checklist de submissão e participação
 
-- [ ] Confirmar repositório **público** no GitHub e seu link final.
+- [x] Repositório público: https://github.com/CauanCosta7/soujunior-apoia-se.
 - [x] Incluir licença open source (MIT para o código).
 - [x] Incluir descrição, stack e comandos no README.
 - [x] Integrantes informados no README: Cauan Costa, Cauã Jefferson e Kledinilson.
