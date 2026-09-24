@@ -1,3 +1,4 @@
+import { createMotionPreference } from "./motionPreference";
 export function initializeInteractions(root: HTMLElement) {
   let disposed = false;
   const cleanups: (() => void)[] = [];
@@ -41,6 +42,14 @@ export function initializeInteractions(root: HTMLElement) {
     timers.add(id);
     return id;
   }
+  function clearTimer(id: number) {
+    window.clearTimeout(id);
+    timers.delete(id);
+  }
+  function clearFrame(id: number) {
+    cancelAnimationFrame(id);
+    frames.delete(id);
+  }
   function nextFrame(callback: FrameRequestCallback) {
     if (disposed) return 0;
     const id = requestAnimationFrame((time) => {
@@ -51,17 +60,19 @@ export function initializeInteractions(root: HTMLElement) {
     return id;
   }
 
-  const motionPreference = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  );
+  const { preference: motionPreference, dispose: disposeMotion } =
+    createMotionPreference(
+      root.querySelector<HTMLButtonElement>(".motion-toggle"),
+    );
+  cleanups.push(disposeMotion);
+  const resumeMotion: (() => void)[] = [];
   const desktopMenu = window.matchMedia("(min-width: 1101px)");
-  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
   const canObserve = "IntersectionObserver" in window;
   const finishMotion: (() => void)[] = [];
   const numberFormat = new Intl.NumberFormat("pt-BR");
 
   // Light is the first-visit default; the visitor's explicit choice is remembered.
-  const themeButton = document.querySelector<HTMLElement>(".theme-toggle");
+  const themeButton = root.querySelector<HTMLElement>(".theme-toggle");
   let currentTheme: "light" | "dark" = "light";
   try {
     currentTheme =
@@ -92,7 +103,7 @@ export function initializeInteractions(root: HTMLElement) {
     applyTheme(next);
   });
 
-  // Visibility is opt-in: failed/disabled JavaScript never hides the page.
+  // Viewport hiding is opt-in after React has mounted readable content.
   function whenVisible(
     element: Element | null,
     callback: () => void,
@@ -197,8 +208,8 @@ export function initializeInteractions(root: HTMLElement) {
   });
 
   // The mobile menu keeps native link navigation and keyboard focus behavior.
-  const menuButton = document.querySelector<HTMLElement>(".menu");
-  const menu = document.querySelector<HTMLElement>("#main-navigation");
+  const menuButton = root.querySelector<HTMLElement>(".menu");
+  const menu = root.querySelector<HTMLElement>("#main-navigation");
   function closeMenu(returnFocus = false) {
     if (!menuButton || !menu) return;
     menu.classList.remove("is-open");
@@ -207,7 +218,7 @@ export function initializeInteractions(root: HTMLElement) {
     if (returnFocus) menuButton.focus();
   }
   if (menuButton && menu) {
-    on(menuButton, "click", () => {
+    on(menuButton, "click", (event) => {
       const open = menuButton.getAttribute("aria-expanded") !== "true";
       menu.classList.toggle("is-open", open);
       menuButton.setAttribute("aria-expanded", String(open));
@@ -215,6 +226,8 @@ export function initializeInteractions(root: HTMLElement) {
         "aria-label",
         open ? "Fechar menu" : "Abrir menu",
       );
+      if (open && event.detail === 0)
+        menu.querySelector<HTMLAnchorElement>("a")?.focus();
     });
     menu
       .querySelectorAll("a")
@@ -235,8 +248,8 @@ export function initializeInteractions(root: HTMLElement) {
     });
   }
 
-  const response = document.querySelector<HTMLElement>(".response");
-  const amounts = [...document.querySelectorAll<HTMLElement>(".amount")];
+  const response = root.querySelector<HTMLElement>(".response");
+  const amounts = [...root.querySelectorAll<HTMLElement>(".amount")];
   amounts.forEach((button) =>
     on(button, "click", () => {
       amounts.forEach((option) => {
@@ -254,7 +267,7 @@ export function initializeInteractions(root: HTMLElement) {
 
   // Native <details> remains usable without animation support.
   const accordion = [
-    ...document.querySelectorAll<HTMLDetailsElement>(".faq-entry"),
+    ...root.querySelectorAll<HTMLDetailsElement>(".faq-entry"),
   ].map((element) => ({
     element,
     summary: element.querySelector("summary")!,
@@ -315,13 +328,16 @@ export function initializeInteractions(root: HTMLElement) {
   );
 
   // Stories advance every three seconds and pause during direct interaction.
-  const stories = [...document.querySelectorAll<HTMLElement>(".test-card")];
-  const storyTrack = document.querySelector<HTMLElement>(".test-track");
+  const stories = [...root.querySelectorAll<HTMLElement>(".test-card")];
+  const storyTrack = root.querySelector<HTMLElement>(".test-track");
   let storyIndex = Math.max(
     0,
     stories.findIndex((story) => story.classList.contains("active")),
   );
   let storyTimer = 0;
+  let storyHovered = false;
+  let storyFocused = false;
+  const storySection = root.querySelector(".testimonials");
   function showStory(next: number) {
     if (!stories.length) return;
     storyIndex = (next + stories.length) % stories.length;
@@ -333,12 +349,22 @@ export function initializeInteractions(root: HTMLElement) {
     });
   }
   function stopStoryTimer() {
-    window.clearTimeout(storyTimer);
+    clearTimer(storyTimer);
     storyTimer = 0;
   }
   function scheduleStoryTimer() {
     stopStoryTimer();
-    if (stories.length < 2 || motionPreference.matches || document.hidden)
+    storyTrack?.setAttribute(
+      "aria-live",
+      motionPreference.matches ? "polite" : "off",
+    );
+    if (
+      stories.length < 2 ||
+      motionPreference.matches ||
+      document.hidden ||
+      storyHovered ||
+      storyFocused
+    )
       return;
     storyTimer = later(() => {
       showStory(storyIndex + 1);
@@ -346,18 +372,32 @@ export function initializeInteractions(root: HTMLElement) {
     }, 3000);
   }
   if (stories.length) showStory(storyIndex);
-  on(document.querySelector<HTMLElement>(".test-next"), "click", () => {
+  on(root.querySelector<HTMLElement>(".test-next"), "click", () => {
     showStory(storyIndex + 1);
     scheduleStoryTimer();
   });
-  on(document.querySelector<HTMLElement>(".test-prev"), "click", () => {
+  on(root.querySelector<HTMLElement>(".test-prev"), "click", () => {
     showStory(storyIndex - 1);
     scheduleStoryTimer();
   });
-  on(storyTrack, "mouseenter", stopStoryTimer);
-  on(storyTrack, "mouseleave", scheduleStoryTimer);
-  on(storyTrack, "focusin", stopStoryTimer);
-  on(storyTrack, "focusout", scheduleStoryTimer);
+  on(storyTrack, "mouseenter", () => {
+    storyHovered = true;
+    stopStoryTimer();
+  });
+  on(storyTrack, "mouseleave", () => {
+    storyHovered = false;
+    scheduleStoryTimer();
+  });
+  on(storySection, "focusin", () => {
+    storyFocused = true;
+    stopStoryTimer();
+  });
+  on(storySection, "focusout", (event) => {
+    if (!storySection?.contains(event.relatedTarget as Node | null)) {
+      storyFocused = false;
+      scheduleStoryTimer();
+    }
+  });
   on(document, "visibilitychange", () =>
     document.hidden ? stopStoryTimer() : scheduleStoryTimer(),
   );
@@ -399,14 +439,11 @@ export function initializeInteractions(root: HTMLElement) {
   );
 
   // Desktop transparency opens automatically once visible; it never captures page scroll.
-  const spendLandscape =
-    document.querySelector<HTMLElement>(".spend-landscape");
-  const spendViewport = document.querySelector<HTMLElement>(".spend-viewport");
-  const spendCards = document.querySelector<HTMLElement>(".spend-cards");
-  const spendItems = [...document.querySelectorAll<HTMLElement>(".spend-card")];
-  const spendProgress = document.querySelector<HTMLElement>(
-    ".spend-progress span",
-  );
+  const spendLandscape = root.querySelector<HTMLElement>(".spend-landscape");
+  const spendViewport = root.querySelector<HTMLElement>(".spend-viewport");
+  const spendCards = root.querySelector<HTMLElement>(".spend-cards");
+  const spendItems = [...root.querySelectorAll<HTMLElement>(".spend-card")];
+  const spendProgress = root.querySelector<HTMLElement>(".spend-progress span");
   const compactTransparency = window.matchMedia("(max-width: 1024px)");
   let spendOpened = false;
   let spendOpenTimer = 0;
@@ -447,7 +484,7 @@ export function initializeInteractions(root: HTMLElement) {
     nextFrame(() => layoutSpend(true));
   }
   function resetSpend() {
-    window.clearTimeout(spendOpenTimer);
+    clearTimer(spendOpenTimer);
     spendOpenTimer = 0;
     if (compactTransparency.matches) return;
     spendOpened = false;
@@ -460,7 +497,7 @@ export function initializeInteractions(root: HTMLElement) {
       (entries) => {
         const entry = entries[0];
         if (entry.isIntersecting && entry.intersectionRatio >= 0.22) {
-          window.clearTimeout(spendOpenTimer);
+          clearTimer(spendOpenTimer);
           spendOpenTimer = later(openSpend, 120);
         } else if (!entry.isIntersecting) {
           resetSpend();
@@ -478,16 +515,16 @@ export function initializeInteractions(root: HTMLElement) {
   );
 
   // Compact transparency carousel: arrows, swipe and optional autoplay.
-  const spendPrev = document.querySelector<HTMLElement>(".spend-prev");
-  const spendNext = document.querySelector<HTMLElement>(".spend-next");
-  const spendPosition = document.querySelector<HTMLElement>(".spend-position");
+  const spendPrev = root.querySelector<HTMLElement>(".spend-prev");
+  const spendNext = root.querySelector<HTMLElement>(".spend-next");
+  const spendPosition = root.querySelector<HTMLElement>(".spend-position");
   let spendIndex = 0;
   let spendTimer = 0;
   let spendVisible = false;
   let spendPaused = false;
   let spendManuallyPaused = false;
   const spendPlayback =
-    document.querySelector<HTMLButtonElement>(".spend-playback");
+    root.querySelector<HTMLButtonElement>(".spend-playback");
   function updateSpendPosition() {
     if (spendPosition)
       spendPosition.textContent = `${spendIndex + 1} / ${spendItems.length}`;
@@ -513,7 +550,7 @@ export function initializeInteractions(root: HTMLElement) {
     updateSpendPosition();
   }
   function stopSpendTimer() {
-    window.clearTimeout(spendTimer);
+    clearTimer(spendTimer);
     spendTimer = 0;
   }
   function scheduleSpendTimer() {
@@ -562,7 +599,7 @@ export function initializeInteractions(root: HTMLElement) {
     spendViewport,
     "scroll",
     () => {
-      window.clearTimeout(spendScrollTimer);
+      clearTimer(spendScrollTimer);
       spendScrollTimer = later(() => {
         if (
           !compactTransparency.matches ||
@@ -643,13 +680,13 @@ export function initializeInteractions(root: HTMLElement) {
   scheduleSpendTimer();
 
   // The photographic strip moves continuously and never depends on page scroll.
-  const gallery = document.querySelector<HTMLElement>(".momentum");
+  const gallery = root.querySelector<HTMLElement>(".momentum");
   const track = gallery?.querySelector<HTMLElement>(".momentum-track");
   const group = track?.querySelector<HTMLElement>(".momentum-set");
   let galleryVisible = true;
   let galleryFrame = 0;
   let galleryCycle = 0;
-  let galleryStart = performance.now();
+  const galleryStart = performance.now();
   if (group && track) {
     const duplicate = group.cloneNode(true) as HTMLElement;
     duplicate.setAttribute("aria-hidden", "true");
@@ -667,6 +704,7 @@ export function initializeInteractions(root: HTMLElement) {
       if (!galleryFrame && galleryVisible && !motionPreference.matches)
         galleryFrame = nextFrame(paint);
     };
+    resumeMotion.push(schedule);
     const measure = () => {
       galleryCycle = group.getBoundingClientRect().width;
       schedule();
@@ -678,7 +716,7 @@ export function initializeInteractions(root: HTMLElement) {
           galleryVisible = entries[0].isIntersecting;
           if (galleryVisible) schedule();
           else {
-            cancelAnimationFrame(galleryFrame);
+            clearFrame(galleryFrame);
             galleryFrame = 0;
           }
         },
@@ -692,7 +730,7 @@ export function initializeInteractions(root: HTMLElement) {
       if (!disposed) measure();
     });
     finishMotion.push(() => {
-      cancelAnimationFrame(galleryFrame);
+      clearFrame(galleryFrame);
       galleryFrame = 0;
       track.style.transform = "";
     });
@@ -715,7 +753,7 @@ export function initializeInteractions(root: HTMLElement) {
             element.style.setProperty("--reveal-delay", `${order * delay}ms`);
           });
       });
-      const reveals = document.querySelectorAll<HTMLElement>(
+      const reveals = root.querySelectorAll<HTMLElement>(
         ".reveal, .hero-copy, .test-track, .source-link, .funding-heading, .funding-bottom, .faq-intro, .faq-entry, .final-inner > div, .final-mascot, .giving-note",
       );
       reveals.forEach((element) => {
@@ -738,7 +776,7 @@ export function initializeInteractions(root: HTMLElement) {
     }
 
     // Accessible text stays intact; only its decorative visual copy is typed.
-    const lines = [...document.querySelectorAll<HTMLElement>(".type-line")];
+    const lines = [...root.querySelectorAll<HTMLElement>(".type-line")];
     const typed = lines.map((line) => {
       const measure = line.querySelector(".type-measure");
       const characters = Array.from(measure?.textContent ?? "");
@@ -758,13 +796,13 @@ export function initializeInteractions(root: HTMLElement) {
       let typingFrame = 0;
       let typingStarted = false;
       const complete = () => {
-        cancelAnimationFrame(typingFrame);
+        clearFrame(typingFrame);
         typed.forEach((item) => {
           item.copy.textContent = item.characters.join("");
           item.line.classList.remove("is-typing");
         });
       };
-      whenVisible(document.querySelector<HTMLElement>(".hero h1"), () => {
+      whenVisible(root.querySelector<HTMLElement>(".hero h1"), () => {
         if (typingStarted) return;
         typingStarted = true;
         if (motionPreference.matches) {
@@ -857,14 +895,14 @@ export function initializeInteractions(root: HTMLElement) {
         );
       });
 
-    document.querySelectorAll<HTMLElement>(".metric").forEach((card, index) => {
+    root.querySelectorAll<HTMLElement>(".metric").forEach((card, index) => {
       const value = card.querySelector<HTMLElement>("[data-count]");
       if (!value) return;
       const target = Number(value.dataset.count);
       if (!Number.isFinite(target)) return;
       let frame = 0;
       const complete = () => {
-        cancelAnimationFrame(frame);
+        clearFrame(frame);
         value.textContent = numberFormat.format(target);
         card.classList.remove("metric-pending");
       };
@@ -872,7 +910,7 @@ export function initializeInteractions(root: HTMLElement) {
       repeatInViewport(
         card,
         () => {
-          cancelAnimationFrame(frame);
+          clearFrame(frame);
           card.classList.remove("metric-pending");
           if (motionPreference.matches) {
             complete();
@@ -894,7 +932,7 @@ export function initializeInteractions(root: HTMLElement) {
           frame = nextFrame(tick);
         },
         (rect) => {
-          cancelAnimationFrame(frame);
+          clearFrame(frame);
           card.style.setProperty(
             "--metric-y",
             rect.bottom < 0 ? "-30px" : "30px",
@@ -910,19 +948,22 @@ export function initializeInteractions(root: HTMLElement) {
   on(motionPreference, "change", () => {
     if (motionPreference.matches) {
       stopStoryTimer();
+      storyTrack?.setAttribute("aria-live", "polite");
       scheduleSpendTimer();
       finishMotion.forEach((finish) => finish());
     } else {
+      resumeMotion.forEach((resume) => resume());
       scheduleStoryTimer();
       scheduleSpendTimer();
     }
+    layoutSpend();
   });
 
   return () => {
     disposed = true;
     cleanups.forEach((fn) => fn());
-    timers.forEach(window.clearTimeout);
-    frames.forEach(cancelAnimationFrame);
+    timers.forEach(clearTimer);
+    frames.forEach(clearFrame);
     root
       .querySelectorAll("*")
       .forEach((el) => el.getAnimations().forEach((a) => a.cancel()));

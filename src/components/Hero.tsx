@@ -1,12 +1,11 @@
 export function Hero() {
   return (
     <section
-      className={"hero hero-manifesto"}
-      id={"hero"}
-      aria-labelledby={"hero-title"}
+      className="hero hero-manifesto"
+      id="hero"
+      aria-labelledby="hero-title"
     >
-      {"\n      "}
-      <div className={"hero-texture"} aria-hidden={"true"}>
+      <div className="hero-texture" aria-hidden="true">
         <span></span>
         <span></span>
         <span></span>
@@ -20,21 +19,19 @@ export function Hero() {
         <span></span>
         <span></span>
       </div>
-      {"\n      "}
-      <div className={"wrap hero-grid"}>
-        {"\n        "}
-        <div className={"hero-copy reveal"}>
-          {"\n          "}
-          <h1 id={"hero-title"}>
-            <span className={"hero-line"}>{"Talento precisa"}</span>
-            <span className={"hero-line"}>{"de pessoas que"}</span>
-            <span className={"hero-emphasis"}>
+
+      <div className="wrap hero-grid">
+        <div className="hero-copy reveal">
+          <h1 id="hero-title">
+            <span className="hero-line">{"Talento precisa"}</span>
+            <span className="hero-line">{"de pessoas que"}</span>
+            <span className="hero-emphasis">
               {"acreditam."}
               <svg
-                className={"hero-scribble"}
+                className="hero-scribble"
                 viewBox={"0 0 360 112"}
                 preserveAspectRatio={"none"}
-                aria-hidden={"true"}
+                aria-hidden="true"
               >
                 <path
                   pathLength={"1"}
@@ -51,33 +48,31 @@ export function Hero() {
               </svg>
             </span>
           </h1>
-          {"\n          "}
-          <p className={"lead"}>
+
+          <p className="lead">
             {
               "A SouJunior conecta pessoas em início de carreira a projetos, mentoria e uma comunidade onde conhecimento vira experiência."
             }
           </p>
-          {"\n          "}
-          <div className={"hero-actions"}>
+
+          <div className="hero-actions">
             <a
-              className={"btn hero-primary"}
+              className="btn hero-primary"
               href={"https://apoia.se/soujunior"}
-              target={"_blank"}
-              rel={"noopener"}
+              target="_blank"
+              rel="noopener"
             >
               {"Apoie a SouJunior"}
             </a>
-            <a className={"btn hero-secondary"} href={"#impacto"}>
+            <a className="btn hero-secondary" href={"#impacto"}>
               {"Conheça o impacto"}
             </a>
           </div>
-          {"\n        "}
         </div>
-        {"\n        "}
-        <div className={"hero-visual reveal"}>
-          {"\n          "}
+
+        <div className="hero-visual reveal">
           <img
-            className={"hero-person"}
+            className="hero-person"
             src={"assets/hero-soujunior.png"}
             alt={
               "Jovem participante da comunidade SouJunior ao lado do mascote"
@@ -87,11 +82,8 @@ export function Hero() {
             fetchPriority={"high"}
             decoding={"async"}
           />
-          {"\n        "}
         </div>
-        {"\n      "}
       </div>
-      {"\n    "}
     </section>
   );
 }

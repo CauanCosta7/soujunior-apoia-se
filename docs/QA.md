@@ -25,3 +25,7 @@ Atualização: revisão de tema escuro e microinterações concluída com 7 test
 ## Atualização — 24/09/2026
 
 Oito testes aprovados (26,6 s). O novo cenário valida reprodução automática da transparência em quatro segundos mesmo com o ponteiro sobre o card, pausa/retomada, navegação manual, retorno do quarto ao primeiro card e interrupção com movimento reduzido. A rotação para quando o carrossel deixa a área visível ou a aba fica oculta.
+
+## Revisão ampliada — 24/09/2026
+
+20 testes aprovados, lint sem erros/avisos, TypeScript e build aprovados; auditoria de dependências sem vulnerabilidades conhecidas reportadas. Escopo completo, ajustes de comparação visual e limitações em [ACCESSIBILITY.md](ACCESSIBILITY.md).

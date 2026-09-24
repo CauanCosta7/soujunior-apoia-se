@@ -25,3 +25,35 @@ test("transparency advances every four seconds, wraps and can be paused", async 
   await page.waitForTimeout(4300);
   await expect(position).toHaveText("1 / 4");
 });
+
+for (const width of [390, 768, 1440]) {
+  test(`transparency hover stays inside the clipping area at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/");
+    await page.locator(".spend-viewport").scrollIntoViewIfNeeded();
+    if (width <= 1024)
+      await page
+        .getByRole("button", { name: "Pausar rotação automática" })
+        .click();
+    for (const index of [0, 1, 3]) {
+      if (width <= 1024) {
+        while (
+          (await page.locator(".spend-position").innerText()) !==
+          `${index + 1} / 4`
+        ) {
+          await page.getByRole("button", { name: "Próximo destino" }).click();
+        }
+      }
+      const card = page.locator(".spend-card").nth(index);
+      await card.hover();
+      await expect(card).toHaveCSS("translate", "0px -7px");
+      const bounds = await card.evaluate((el) => ({
+        top: el.getBoundingClientRect().top,
+        clipTop: el.closest(".spend-viewport")!.getBoundingClientRect().top,
+      }));
+      expect(bounds.top).toBeGreaterThanOrEqual(bounds.clipTop);
+    }
+  });
+}

@@ -20,7 +20,7 @@ export default function App() {
         Ir para o conteúdo
       </a>
       <Header />
-      <main id="conteudo">
+      <main id="conteudo" tabIndex={-1}>
         <Hero />
         <CommunityStrip />
         <Journey />

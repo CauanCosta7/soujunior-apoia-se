@@ -1,44 +1,40 @@
 export function Transparency() {
   return (
     <section
-      className={"why funding-section"}
-      id={"causa"}
-      aria-labelledby={"resources-title"}
+      className="why funding-section"
+      id="causa"
+      aria-labelledby="resources-title"
     >
-      {"\n      "}
-      <div className={"wrap"}>
-        {"\n        "}
-        <div id={"transparencia"} aria-labelledby={"resources-title"}>
-          {"\n          "}
-          <div className={"spend-landscape"}>
-            {"\n            "}
-            <div className={"spend-sticky"}>
-              <div className={"funding-heading"}>
-                <h3 id={"resources-title"}>
+      <div className="wrap">
+        <div id="transparencia">
+          <div className="spend-landscape">
+            <div className="spend-sticky">
+              <div className="funding-heading">
+                <h3 id="resources-title">
                   {"O que o seu apoio ajuda a manter de pé"}
                 </h3>
                 <p>{"Custos reais da SouJunior."}</p>
               </div>
-              <div className={"spend-progress"} aria-hidden={"true"}>
+              <div className="spend-progress" aria-hidden="true">
                 <span></span>
               </div>
               <div
-                className={"spend-viewport"}
-                id={"spend-carousel"}
-                role={"region"}
-                aria-roledescription={"carrossel"}
+                className="spend-viewport"
+                id="spend-carousel"
+                tabIndex={0}
+                role="region"
+                aria-roledescription="carrossel"
                 aria-label={
                   "Destinos dos recursos apresentados conforme a página avança"
                 }
               >
-                <div className={"spend-cards"}>
-                  {"\n            "}
-                  <article className={"spend-card reveal"}>
-                    <div className={"spend-title"}>
+                <div className="spend-cards">
+                  <article className="spend-card reveal">
+                    <div className="spend-title">
                       <svg
-                        className={"ui-icon"}
+                        className="ui-icon"
                         viewBox={"0 0 24 24"}
-                        aria-hidden={"true"}
+                        aria-hidden="true"
                         focusable={"false"}
                       >
                         <path
@@ -55,13 +51,13 @@ export function Transparency() {
                       }
                     </p>
                   </article>
-                  {"\n            "}
-                  <article className={"spend-card reveal"}>
-                    <div className={"spend-title"}>
+
+                  <article className="spend-card reveal">
+                    <div className="spend-title">
                       <svg
-                        className={"ui-icon"}
+                        className="ui-icon"
                         viewBox={"0 0 24 24"}
-                        aria-hidden={"true"}
+                        aria-hidden="true"
                         focusable={"false"}
                       >
                         <ellipse cx={"12"} cy={"5"} rx={"8"} ry={"3"}></ellipse>
@@ -79,13 +75,13 @@ export function Transparency() {
                       }
                     </p>
                   </article>
-                  {"\n            "}
-                  <article className={"spend-card reveal"}>
-                    <div className={"spend-title"}>
+
+                  <article className="spend-card reveal">
+                    <div className="spend-title">
                       <svg
-                        className={"ui-icon"}
+                        className="ui-icon"
                         viewBox={"0 0 24 24"}
-                        aria-hidden={"true"}
+                        aria-hidden="true"
                         focusable={"false"}
                       >
                         <circle cx={"12"} cy={"12"} r={"9"}></circle>
@@ -101,13 +97,13 @@ export function Transparency() {
                       }
                     </p>
                   </article>
-                  {"\n            "}
-                  <article className={"spend-card reveal"}>
-                    <div className={"spend-title"}>
+
+                  <article className="spend-card reveal">
+                    <div className="spend-title">
                       <svg
-                        className={"ui-icon"}
+                        className="ui-icon"
                         viewBox={"0 0 24 24"}
-                        aria-hidden={"true"}
+                        aria-hidden="true"
                         focusable={"false"}
                       >
                         <rect
@@ -127,33 +123,33 @@ export function Transparency() {
                       }
                     </p>
                   </article>
-                  {"\n            "}
                 </div>
               </div>
               <div
-                className={"spend-mobile-controls"}
-                aria-label={"Controles dos destinos dos recursos"}
+                className="spend-mobile-controls"
+                role="group"
+                aria-label="Controles dos destinos dos recursos"
               >
                 <button
-                  className={"spend-prev"}
-                  type={"button"}
-                  aria-label={"Destino anterior"}
-                  aria-controls={"spend-carousel"}
+                  className="spend-prev"
+                  type="button"
+                  aria-label="Destino anterior"
+                  aria-controls="spend-carousel"
                 >
-                  <svg viewBox={"0 0 24 24"} aria-hidden={"true"}>
+                  <svg viewBox={"0 0 24 24"} aria-hidden="true">
                     <path d={"m15 18-6-6 6-6"}></path>
                   </svg>
                 </button>
-                <span className={"spend-position"} aria-live={"polite"}>
+                <span className="spend-position" aria-live="polite">
                   {"1 / 4"}
                 </span>
                 <button
-                  className={"spend-next"}
-                  type={"button"}
-                  aria-label={"Próximo destino"}
-                  aria-controls={"spend-carousel"}
+                  className="spend-next"
+                  type="button"
+                  aria-label="Próximo destino"
+                  aria-controls="spend-carousel"
                 >
-                  <svg viewBox={"0 0 24 24"} aria-hidden={"true"}>
+                  <svg viewBox={"0 0 24 24"} aria-hidden="true">
                     <path d={"m9 6 6 6-6 6"}></path>
                   </svg>
                 </button>
@@ -181,13 +177,9 @@ export function Transparency() {
                 </button>
               </div>
             </div>
-            {"\n          "}
           </div>
-          {"\n        "}
         </div>
-        {"\n      "}
       </div>
-      {"\n    "}
     </section>
   );
 }

@@ -191,3 +191,118 @@
   opacity: 0.55;
   cursor: default;
 }
+
+/* Reserve room above the scroll clip for the 7px hover lift. Negative margin
+   keeps the cards and surrounding content in their existing positions. */
+.spend-viewport {
+  padding-top: 16px !important;
+  margin-top: -16px !important;
+}
+@media (min-width: 1025px) and (prefers-reduced-motion: no-preference) {
+  .spend-viewport {
+    height: 386px !important;
+  }
+}
+
+/* Readable small text in the light palette too. */
+.route-step:nth-child(2) .route-dot {
+  background: #5148cc;
+}
+html:not([data-theme="dark"]) .giving-action .response {
+  color: #233da4 !important;
+}
+html:not([data-theme="dark"]) .metric:nth-child(4) {
+  --tile: #5148cc;
+}
+
+.motion-toggle {
+  display: grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  padding: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  background: #111a3d;
+  cursor: pointer;
+}
+.motion-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.motion-toggle .motion-play-icon,
+.motion-toggle[aria-pressed="true"] .motion-pause-icon {
+  display: none;
+}
+.motion-toggle[aria-pressed="true"] .motion-play-icon {
+  display: block;
+}
+.motion-toggle:disabled {
+  cursor: default;
+}
+.motion-toggle:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 4px;
+}
+html[data-motion="paused"] {
+  scroll-behavior: auto !important;
+}
+html[data-motion="paused"] *,
+html[data-motion="paused"] *::before,
+html[data-motion="paused"] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+html[data-motion="paused"] .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+html[data-motion="paused"] .spend-card,
+html[data-motion="paused"] .ui-icon {
+  translate: none !important;
+  rotate: none !important;
+  scale: none !important;
+}
+@media (min-width: 1025px) {
+  html[data-motion="paused"] .spend-sticky {
+    display: block !important;
+  }
+  html[data-motion="paused"] .spend-viewport {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  html[data-motion="paused"] .spend-cards {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  html[data-motion="paused"] .spend-card:nth-child(n) {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 360px) {
+  header .brand img {
+    width: 112px !important;
+  }
+  .nav-actions {
+    gap: 6px;
+  }
+}
+
+.spend-viewport:focus-visible {
+  outline: 3px solid #233da4;
+  outline-offset: 3px;
+}
+[data-theme="dark"] .spend-viewport:focus-visible {
+  outline-color: var(--yellow);
+}

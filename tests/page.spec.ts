@@ -24,7 +24,9 @@ for (const width of [390, 768, 1440]) {
       [...document.querySelectorAll("h1,h2,h3,h4,p,a,img")].map((el) => ({
         tag: el.tagName,
         text: el.textContent?.replace(/\s+/g, " ").trim(),
-        href: el.getAttribute("href"),
+        // The brand now has an explicit, accessible top-of-page target.
+        href:
+          el.getAttribute("href") === "#" ? "#hero" : el.getAttribute("href"),
         src: el.getAttribute("src")?.replace(/^\//, "") ?? null,
         rect: {
           w: el.getBoundingClientRect().width,
@@ -35,7 +37,16 @@ for (const width of [390, 768, 1440]) {
     await page.evaluate(() =>
       Promise.all([...document.images].map((i) => i.decode().catch(() => {}))),
     );
-    const original = PNG.sync.read(await page.screenshot({ fullPage: true }));
+    // Deliberate accessibility updates have independent tests; keep the rest
+    // of the migration comparison pinned to the supplied original.
+    const approvedChanges =
+      ".nav-actions, .route-step:nth-child(2) .route-dot, .metric:nth-child(4), .giving-action .response, .spend-viewport, .spend-mobile-controls";
+    const original = PNG.sync.read(
+      await page.screenshot({
+        fullPage: true,
+        mask: [page.locator(approvedChanges)],
+      }),
+    );
     await page.goto("/");
     await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() =>
@@ -49,8 +60,8 @@ for (const width of [390, 768, 1440]) {
     ).toBe(true);
     const migrated = PNG.sync.read(
       await page.screenshot({
-        path: `docs/preview-${width}.png`,
         fullPage: true,
+        mask: [page.locator(approvedChanges)],
       }),
     );
     expect(migrated.width).toBe(original.width);

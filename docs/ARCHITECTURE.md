@@ -31,3 +31,9 @@ A configuração de GitHub Actions está em docs/github-actions-quality.yml como
 A camada `refinements` reúne os ajustes solicitados após a migração: pares explícitos de cores, seleção, foco e microinterações. Os movimentos extras de transparência duram até 3,62 segundos por entrada e não são loops contínuos. A translação de hover usa a propriedade individual `translate` para não disputar o `transform` de abertura dos cards.
 
 O carrossel compacto de transparência usa intervalo de quatro segundos e observa a visibilidade do próprio viewport. O hover não bloqueia a rotação; um botão permite pausar explicitamente. Toque em andamento, foco no conteúdo, aba oculta e movimento reduzido suspendem a reprodução. No desktop amplo, os quatro cards permanecem apresentados em conjunto.
+
+## Qualidade e movimento
+
+`motionPreference.ts` combina a preferência do sistema e a pausa explícita persistida; `MotionControl` expõe esse controle no cabeçalho. Os efeitos respeitam a preferência efetiva. O registro de timers e frames remove itens cancelados, e os seletores do conteúdo ficam restritos à raiz da aplicação.
+
+ESLint inclui regras de TypeScript, hooks React e JSX acessível. A exceção configurada para tabIndex permite regiões nomeadas, necessária ao acesso por teclado do carrossel rolável; não desabilita a regra geral. `npm run check` é a verificação local completa.

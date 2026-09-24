@@ -34,7 +34,7 @@ O projeto é do **Squad Cebolucius — nº 21**:
 - **Escolha como contribuir.** As sugestões começam em R$ 2; o valor e a modalidade são confirmados no Apoia.se, onde o pagamento acontece.
 - **Tire suas dúvidas.** O FAQ reúne respostas e acesso aos canais da comunidade.
 
-Tema claro e escuro, navegação por teclado, layout responsivo e animações sutis acompanham essa jornada. A preferência por movimento reduzido é respeitada, e o tema escolhido fica salvo no navegador.
+Tema claro e escuro, navegação por teclado, layout responsivo e animações sutis acompanham essa jornada. Um controle no cabeçalho permite pausar os movimentos da página. A preferência por movimento reduzido é respeitada; tema e pausa ficam salvos no navegador.
 
 ### De onde vêm os dados?
 
@@ -65,6 +65,8 @@ Abra **http://localhost:5173**, ou o endereço indicado pelo terminal.
 | `npm run dev` | Desenvolver com atualização automática no navegador |
 | `npm run build` | Verificar TypeScript e gerar a versão de produção em `dist/` |
 | `npm run preview` | Conferir o build localmente |
+| `npm run lint` | Conferir boas práticas de TypeScript, React e acessibilidade JSX |
+| `npm run check` | Executar lint, tipos, build e testes em sequência |
 | `npm run typecheck` | Verificar os tipos sem gerar arquivos |
 | `npm test` | Executar os testes de interface e regressão |
 | `npm run audit:dark` | Auditar contraste do tema escuro, com o servidor local ativo |
@@ -93,7 +95,7 @@ Leia a [arquitetura](docs/ARCHITECTURE.md) para entender a ordem dos estilos, os
 
 ## Cuidado com os detalhes
 
-Os testes cobrem larguras de **390, 768 e 1440 px**, comparação com a página de referência, tema persistido, menu mobile, FAQ, contribuições e carrosséis. Há verificações específicas para contraste no tema escuro, hover, foco por teclado e movimento reduzido.
+Os testes cobrem larguras de **390, 768 e 1440 px**, comparação com a página de referência, tema persistido, menu mobile, FAQ, contribuições e carrosséis. A suíte tem 20 cenários, incluindo auditoria automática de acessibilidade em ambos os temas, tela de 320 px, hover, foco por teclado, ampliação de texto e movimento reduzido. Veja o [relatório de acessibilidade e qualidade](docs/ACCESSIBILITY.md).
 
 Para executar:
 
@@ -127,7 +129,7 @@ A [conferência do edital](docs/EDITAL.md) reúne os requisitos do hackathon e o
 - **SouJunior:** marca, campanha, retratos e informações fornecidas ao squad.
 - **Unsplash e Pexels:** fotografias referenciadas nos componentes.
 - **Google Fonts:** Funnel Display e Funnel Sans.
-- **Ferramentas:** React, TypeScript, Vite, Playwright, axe-core, Prettier, PNGJS e Pixelmatch.
+- **Ferramentas:** React, TypeScript, Vite, Playwright, axe-core, ESLint, Prettier, PNGJS e Pixelmatch.
 
 O código é distribuído sob a [licença MIT](LICENSE). Marcas e materiais de terceiros mantêm seus respectivos direitos e condições de uso.
 

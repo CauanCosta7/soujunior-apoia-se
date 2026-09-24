@@ -1,14 +1,15 @@
+import { MotionControl } from "./MotionControl";
 export function Header() {
   return (
     <header>
-      <div className={"wrap nav"}>
-        <a className={"brand"} href={"#"} aria-label={"SouJunior - início"}>
+      <div className="wrap nav">
+        <a className="brand" href="#hero" aria-label="SouJunior - início">
           <img src={"assets/logo-soujunior-azul.svg"} alt={"SouJunior"} />
         </a>
         <nav
-          className={"links"}
-          id={"main-navigation"}
-          aria-label={"Navegação principal"}
+          className="links"
+          id="main-navigation"
+          aria-label="Navegação principal"
         >
           <a href={"#como"}>{"Como fazemos"}</a>
           <a href={"#impacto"}>{"Impacto"}</a>
@@ -16,26 +17,26 @@ export function Header() {
           <a href={"#transparencia"}>{"Transparência"}</a>
           <a href={"#faq"}>{"FAQ"}</a>
           <a
-            className={"nav-cta nav-cta-mobile"}
+            className="nav-cta nav-cta-mobile"
             href={"https://apoia.se/soujunior"}
-            target={"_blank"}
-            rel={"noopener"}
+            target="_blank"
+            rel="noopener"
           >
             {"Quero apoiar"}
           </a>
         </nav>
-        <div className={"nav-actions"}>
+        <div className="nav-actions">
           <button
-            className={"theme-toggle"}
-            type={"button"}
-            aria-pressed={"false"}
-            aria-label={"Ativar modo escuro"}
+            className="theme-toggle"
+            type="button"
+            aria-pressed="false"
+            aria-label="Ativar modo escuro"
           >
-            <span className={"theme-track"}>
+            <span className="theme-track">
               <svg
-                className={"theme-sun"}
+                className="theme-sun"
                 viewBox={"0 0 24 24"}
-                aria-hidden={"true"}
+                aria-hidden="true"
               >
                 <circle cx={"12"} cy={"12"} r={"4"}></circle>
                 <path
@@ -45,34 +46,35 @@ export function Header() {
                 ></path>
               </svg>
               <svg
-                className={"theme-moon"}
+                className="theme-moon"
                 viewBox={"0 0 24 24"}
-                aria-hidden={"true"}
+                aria-hidden="true"
               >
                 <path
                   d={"M20 15.2A8 8 0 0 1 8.8 4a8.5 8.5 0 1 0 11.2 11.2Z"}
                 ></path>
               </svg>
-              <span className={"theme-knob"} aria-hidden={"true"}></span>
+              <span className="theme-knob" aria-hidden="true"></span>
             </span>
-            <span className={"sr-only"}>{"Alternar tema"}</span>
+            <span className="sr-only">{"Alternar tema"}</span>
           </button>
+          <MotionControl />
           <a
-            className={"nav-cta nav-cta-desktop"}
+            className="nav-cta nav-cta-desktop"
             href={"https://apoia.se/soujunior"}
-            target={"_blank"}
-            rel={"noopener"}
+            target="_blank"
+            rel="noopener"
           >
             {"Quero apoiar"}
           </a>
           <button
-            className={"menu"}
-            type={"button"}
-            aria-label={"Abrir menu"}
-            aria-controls={"main-navigation"}
-            aria-expanded={"false"}
+            className="menu"
+            type="button"
+            aria-label="Abrir menu"
+            aria-controls="main-navigation"
+            aria-expanded="false"
           >
-            <span className={"menu-icon"} aria-hidden={"true"}></span>
+            <span className="menu-icon" aria-hidden="true"></span>
           </button>
         </div>
       </div>

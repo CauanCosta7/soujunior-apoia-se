@@ -1,10 +1,10 @@
 export function Journey() {
   return (
-    <section className={"journey"} id={"como"}>
-      <div className={"wrap"}>
-        <div className={"journey-head reveal"}>
+    <section className="journey" id="como">
+      <div className="wrap">
+        <div className="journey-head reveal">
           <div>
-            <h2 className={"display"} data-reveal-words="">
+            <h2 className="display" data-reveal-words="">
               {"Ninguém deveria precisar começar sozinho."}
             </h2>
           </div>
@@ -14,9 +14,9 @@ export function Journey() {
             }
           </p>
         </div>
-        <div className={"route"}>
-          <article className={"route-step reveal"}>
-            <div className={"route-dot"}>{"01"}</div>
+        <div className="route">
+          <article className="route-step reveal">
+            <div className="route-dot">{"01"}</div>
             <h3>{"Aprender fazendo"}</h3>
             <p>
               {
@@ -24,8 +24,8 @@ export function Journey() {
               }
             </p>
           </article>
-          <article className={"route-step reveal"}>
-            <div className={"route-dot"}>{"02"}</div>
+          <article className="route-step reveal">
+            <div className="route-dot">{"02"}</div>
             <h3>{"Construir em equipe"}</h3>
             <p>
               {
@@ -33,8 +33,8 @@ export function Journey() {
               }
             </p>
           </article>
-          <article className={"route-step reveal"}>
-            <div className={"route-dot"}>{"03"}</div>
+          <article className="route-step reveal">
+            <div className="route-dot">{"03"}</div>
             <h3>{"Ter com quem contar"}</h3>
             <p>
               {
