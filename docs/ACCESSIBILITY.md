@@ -44,3 +44,7 @@ O teste mantém o limite visual de 0,5% nas áreas preservadas. Áreas deliberad
 - Revisão de código por outro integrante e onboarding independente.
 
 Referências: [WCAG — contraste](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html), [WCAG — pausa de movimento](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html).
+
+## Compatibilidade do lint
+
+O ESLint está na linha 9 porque a versão publicada de eslint-plugin-jsx-a11y declara suporte até ESLint 9. O registro npm sinaliza essa linha como descontinuada; a migração para ESLint 10 depende de compatibilidade do plugin ou substituição deliberada das regras de JSX. Não foi forçada uma combinação de peer dependencies incompatíveis. A auditoria npm não reportou vulnerabilidades conhecidas, o que não elimina essa pendência de atualização da ferramenta de desenvolvimento.
