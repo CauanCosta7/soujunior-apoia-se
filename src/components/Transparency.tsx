@@ -157,6 +157,28 @@ export function Transparency() {
                     <path d={"m9 6 6 6-6 6"}></path>
                   </svg>
                 </button>
+                <button
+                  className="spend-playback"
+                  type="button"
+                  aria-label="Pausar rotação automática"
+                  aria-pressed="false"
+                  aria-controls="spend-carousel"
+                >
+                  <svg
+                    className="spend-pause-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M9 5v14M15 5v14" />
+                  </svg>
+                  <svg
+                    className="spend-play-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="m8 5 11 7-11 7Z" />
+                  </svg>
+                </button>
               </div>
             </div>
             {"\n          "}

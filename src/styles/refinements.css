@@ -179,3 +179,15 @@
 [data-theme="dark"] .route-step:nth-child(2) .route-dot {
   background: #5148cc;
 }
+
+.spend-playback .spend-play-icon,
+.spend-playback[aria-pressed="true"] .spend-pause-icon {
+  display: none;
+}
+.spend-playback[aria-pressed="true"] .spend-play-icon {
+  display: block;
+}
+.spend-playback:disabled {
+  opacity: 0.55;
+  cursor: default;
+}

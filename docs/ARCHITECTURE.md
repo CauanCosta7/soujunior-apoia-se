@@ -29,3 +29,5 @@ Links de nova aba preservam `rel="noopener"`. Não há segredos no cliente. Não
 A configuração de GitHub Actions está em docs/github-actions-quality.yml como modelo inativo. A autenticação de publicação não possui a permissão workflow. Para ativar CI, um mantenedor autorizado pode mover esse arquivo para .github/workflows/quality.yml pelo GitHub. O build e os testes continuam disponíveis localmente.
 
 A camada `refinements` reúne os ajustes solicitados após a migração: pares explícitos de cores, seleção, foco e microinterações. Os movimentos extras de transparência duram até 3,62 segundos por entrada e não são loops contínuos. A translação de hover usa a propriedade individual `translate` para não disputar o `transform` de abertura dos cards.
+
+O carrossel compacto de transparência usa intervalo de quatro segundos e observa a visibilidade do próprio viewport. O hover não bloqueia a rotação; um botão permite pausar explicitamente. Toque em andamento, foco no conteúdo, aba oculta e movimento reduzido suspendem a reprodução. No desktop amplo, os quatro cards permanecem apresentados em conjunto.

@@ -1,14 +1,14 @@
 # Conferência do edital — Desafio Junior
 
-Base: os dois textos anexados pelo solicitante, lidos em 23/09/2026. Esta é uma comparação com o material recebido, não uma certificação da organização. A página foi preservada conforme solicitado.
+Base: os dois textos anexados pelo solicitante, lidos em 23/09/2026. Esta é uma comparação com o material recebido, não uma certificação da organização. A página recebeu os refinamentos solicitados pelo squad. Em 24/09/2026, a equipe confirmou a origem dos dados: comunicação direta da SouJunior via WhatsApp.
 
 ## Requisitos do MVP
 
 | Requisito | Evidência no projeto | Situação |
 | --- | --- | --- |
 | Hero criativo, causa e CTA direto | `Hero.tsx`, link oficial Apoia.se | Presente. O valor mínimo de R$ 2 aparece em Support e FAQ, não no CTA do hero; reforçar no hero é uma oportunidade editorial, não aplicada nesta migração. |
-| Explicar motivo e destino do apoio | Journey, Transparency e FAQ | Presente, com infraestrutura, banco de dados, sites e eventos. A precisão das despesas precisa ser confirmada com a organização. |
-| Dados reais de impacto | Impact: 120 membros, 35 mentores, 3 projetos, 50+ oportunidades | Seção presente; os anexos não comprovam esses números nem informam fonte/data. Pendência relevante. |
+| Explicar motivo e destino do apoio | Journey, Transparency e FAQ | Presente, com infraestrutura, banco de dados, sites e eventos. Informações fornecidas diretamente pela SouJunior ao squad via WhatsApp, conforme confirmação da equipe. |
+| Dados reais de impacto | Impact: 120 membros, 35 mentores, 3 projetos, 50+ oportunidades | Origem confirmada pela equipe: dados fornecidos diretamente pela SouJunior via WhatsApp. |
 | CTA e níveis de contribuição | Support: R$ 2, 5, 10, 25 e Outro | Sugestões presentes. Não são tiers oficiais nem promessas de benefícios; confirmar modalidades na campanha. |
 | Campanha oficial | `https://apoia.se/soujunior` | Destino corresponde ao edital. |
 | Discord | `https://discord.gg/FkBcf3vdQZ` | Destino corresponde ao edital. |
@@ -33,7 +33,7 @@ README é critério de desempate no texto recebido. Documentação clara ajuda, 
 - [x] Repositório público: https://github.com/CauanCosta7/soujunior-apoia-se.
 - [x] Incluir licença open source (MIT para o código).
 - [x] Incluir descrição, stack e comandos no README.
-- [x] Integrantes informados no README: Cauan Costa, Cauã Jefferson e Kledinilson.
+- [x] Integrantes informados no README: Cauan Costa, Cauã Jefferson e Klênildson Araújo.
 - [ ] Gravar vídeo de até 5 minutos mostrando interface, recursos e experiência; disponibilizar conforme o formulário oficial.
 - [ ] Confirmar equipe de 2 a 10 participantes e pelo menos uma pessoa júnior.
 - [ ] Confirmar inscrição, planilha enviada, canais oficiais e apoio de cada integrante a partir de R$ 2.

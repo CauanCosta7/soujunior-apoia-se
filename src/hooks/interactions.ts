@@ -485,6 +485,9 @@ export function initializeInteractions(root: HTMLElement) {
   let spendTimer = 0;
   let spendVisible = false;
   let spendPaused = false;
+  let spendManuallyPaused = false;
+  const spendPlayback =
+    document.querySelector<HTMLButtonElement>(".spend-playback");
   function updateSpendPosition() {
     if (spendPosition)
       spendPosition.textContent = `${spendIndex + 1} / ${spendItems.length}`;
@@ -515,10 +518,19 @@ export function initializeInteractions(root: HTMLElement) {
   }
   function scheduleSpendTimer() {
     stopSpendTimer();
+    const paused = spendManuallyPaused || motionPreference.matches;
+    spendPlayback?.setAttribute(
+      "aria-label",
+      paused ? "Retomar rotação automática" : "Pausar rotação automática",
+    );
+    spendPlayback?.setAttribute("aria-pressed", String(paused));
+    spendPlayback?.toggleAttribute("disabled", motionPreference.matches);
+    spendPosition?.setAttribute("aria-live", paused ? "polite" : "off");
     if (
       !compactTransparency.matches ||
       !spendVisible ||
       spendPaused ||
+      spendManuallyPaused ||
       motionPreference.matches ||
       document.hidden ||
       spendItems.length < 2
@@ -527,8 +539,16 @@ export function initializeInteractions(root: HTMLElement) {
     spendTimer = later(() => {
       showSpend(spendIndex + 1);
       scheduleSpendTimer();
-    }, 4500);
+    }, 4000);
   }
+  on(spendPlayback, "click", () => {
+    spendManuallyPaused = !spendManuallyPaused;
+    scheduleSpendTimer();
+  });
+  on(spendViewport, "touchcancel", () => {
+    spendPaused = false;
+    scheduleSpendTimer();
+  });
   on(spendPrev, "click", () => {
     showSpend(spendIndex - 1);
     scheduleSpendTimer();
@@ -572,14 +592,6 @@ export function initializeInteractions(root: HTMLElement) {
     },
     { passive: true },
   );
-  on(spendViewport, "mouseenter", () => {
-    spendPaused = true;
-    stopSpendTimer();
-  });
-  on(spendViewport, "mouseleave", () => {
-    spendPaused = false;
-    scheduleSpendTimer();
-  });
   on(spendViewport, "focusin", () => {
     spendPaused = true;
     stopSpendTimer();
@@ -609,13 +621,15 @@ export function initializeInteractions(root: HTMLElement) {
   if (spendLandscape && canObserve) {
     const spendObserver = observe(
       (entries) => {
-        spendVisible = entries.some((entry) => entry.isIntersecting);
+        spendVisible = entries.some(
+          (entry) => entry.isIntersecting && entry.intersectionRatio >= 0.25,
+        );
         spendLandscape.classList.toggle("is-visible", spendVisible);
         scheduleSpendTimer();
       },
       { threshold: 0.25 },
     );
-    spendObserver.observe(spendLandscape);
+    spendObserver.observe(spendViewport ?? spendLandscape);
   } else {
     spendVisible = true;
     spendLandscape?.classList.add("is-visible");
@@ -896,7 +910,7 @@ export function initializeInteractions(root: HTMLElement) {
   on(motionPreference, "change", () => {
     if (motionPreference.matches) {
       stopStoryTimer();
-      stopSpendTimer();
+      scheduleSpendTimer();
       finishMotion.forEach((finish) => finish());
     } else {
       scheduleStoryTimer();

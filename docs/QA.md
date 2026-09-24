@@ -16,8 +16,12 @@ A comparação visual automatizada usa movimento reduzido para estabilidade; o t
 
 Ainda executar: contraste de todos os estados em ambos os temas, leitor de tela, zoom a 200%, dispositivos físicos, avaliação de compreensão com pessoas e onboarding realizado por outro integrante. Não se declara certificação WCAG nem nota de Lighthouse.
 
-As fontes dos números de impacto, autorizações de imagem e evidências de participação não são verificáveis apenas pelo código; consultar `EDITAL.md`.
+A origem dos dados de impacto e despesas foi confirmada pela equipe em 24/09/2026: informações recebidas diretamente da SouJunior via WhatsApp. Autorizações de imagem e registros de participação permanecem no checklist de `EDITAL.md`.
 
 Verificação pública adicional: resposta HTTP 200, todas as imagens carregadas e nenhum erro de JavaScript; captura de produção em hero-preview.jpg.
 
 Atualização: revisão de tema escuro e microinterações concluída com 7 testes aprovados. Consulte DARK-MODE.md para escopo, estados verificados e limitações.
+
+## Atualização — 24/09/2026
+
+Oito testes aprovados (26,6 s). O novo cenário valida reprodução automática da transparência em quatro segundos mesmo com o ponteiro sobre o card, pausa/retomada, navegação manual, retorno do quarto ao primeiro card e interrupção com movimento reduzido. A rotação para quando o carrossel deixa a área visível ou a aba fica oculta.

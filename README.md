@@ -1,134 +1,140 @@
 <div align="center">
   <img src="public/assets/logo-soujunior-azul.svg" width="230" alt="SouJunior" />
 
-# Talento precisa de pessoas que acreditam.
+# Quem começa precisa de espaço.
 
-**Uma landing page para conectar apoio, comunidade e oportunidades.**
+Uma comunidade abre portas. O apoio de cada pessoa ajuda a mantê-las abertas.
+
+[**Conheça a página ↗**](https://soujunior-apoia-se.vercel.app) · [Apoie a SouJunior](https://apoia.se/soujunior) · [Explore o código](https://github.com/CauanCosta7/soujunior-apoia-se)
 
 ![React](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-6-646cff?logo=vite&logoColor=white)
 ![Licença](https://img.shields.io/badge/Licença-MIT-22c55e)
 
-[**Acesse o site**](https://soujunior-apoia-se.vercel.app) · [Código no GitHub](https://github.com/CauanCosta7/soujunior-apoia-se) · [Campanha oficial](https://apoia.se/soujunior) · [Como executar](#comece-em-poucos-passos) · [Arquitetura](docs/ARCHITECTURE.md) · [Conferência do edital](docs/EDITAL.md)
-
 </div>
 
-## O projeto
+![Uma prévia da experiência SouJunior](docs/hero-preview.jpg)
 
-Página de apoio à SouJunior, criada no contexto do **Desafio Junior**, para apresentar a causa, o impacto da comunidade e o destino das contribuições. O pagamento acontece na campanha oficial do Apoia.se.
+## Por que esta página existe
 
-Esta entrega migra a versão **V2 — textura urbana** de HTML/CSS/JavaScript para **React + TypeScript + Vite**, preservando os textos, imagens, links, identidade visual, animações e comportamento responsivo. O contexto do hackathon orienta a documentação; não acrescenta informações novas à página.
+Dar os primeiros passos em tecnologia fica mais fácil quando existe espaço para praticar, construir em equipe e ter com quem contar. A SouJunior aproxima pessoas em início de carreira dessas oportunidades.
 
-## Squad Cebolucius · nº 21
+Criamos esta landing page para o **Desafio Junior**, com uma missão: mostrar o que essa comunidade torna possível e convidar mais pessoas a fazer parte dela pelo apoio financeiro. A jornada passa pela causa, pelos resultados e pelo destino dos recursos até chegar à campanha oficial no Apoia.se.
 
-| Integrante |
-| --- |
-| Cauan Costa |
-| Cauã Jefferson |
-| Kledinilson |
+O projeto é do **Squad Cebolucius — nº 21**:
 
-Nomes informados pelo squad. Perfis e funções podem ser acrescentados quando confirmados.
+**Cauan Costa · Cauã Jefferson · Klênildson Araújo**
 
-![Prévia da página](docs/hero-preview.jpg)
+## Um passeio pela experiência
+
+- **Entenda a causa.** A abertura apresenta a comunidade e oferece caminhos para conhecer seu impacto ou apoiar diretamente.
+- **Conheça as pessoas por trás dos números.** Indicadores e histórias mostram a experiência construída na SouJunior.
+- **Veja o que o apoio mantém de pé.** Os cards apresentam infraestrutura, banco de dados, plataformas e operação. Em celular e tablet, avançam automaticamente a cada **4 segundos**, com setas e um controle para pausar.
+- **Escolha como contribuir.** As sugestões começam em R$ 2; o valor e a modalidade são confirmados no Apoia.se, onde o pagamento acontece.
+- **Tire suas dúvidas.** O FAQ reúne respostas e acesso aos canais da comunidade.
+
+Tema claro e escuro, navegação por teclado, layout responsivo e animações sutis acompanham essa jornada. A preferência por movimento reduzido é respeitada, e o tema escolhido fica salvo no navegador.
+
+### De onde vêm os dados?
+
+Os dados de impacto e as informações sobre o destino do apoio foram **fornecidos diretamente pela SouJunior ao squad via WhatsApp**, conforme confirmado pela equipe. Essa é a origem dos números e das despesas apresentados na página.
 
 <details>
-<summary>Veja a página completa</summary>
+<summary>Ver a página completa</summary>
 
-![Página SouJunior em desktop](docs/preview-1440.png)
+![Página completa em desktop](docs/preview-1440.png)
 
 </details>
 
-## Comece em poucos passos
+## Rode na sua máquina
 
-Pré-requisito: **Node.js 22 LTS** e npm. A instalação foi validada com Node 22.15.1. Não há banco de dados, backend ou variáveis de ambiente obrigatórias.
+Você precisa de **Node.js 22** e npm. A instalação foi validada com Node 22.15.1. Não é necessário configurar banco de dados ou variáveis de ambiente.
 
 ```bash
+git clone https://github.com/CauanCosta7/soujunior-apoia-se.git
+cd soujunior-apoia-se
 npm install
 npm run dev
 ```
 
-Abra o endereço exibido pelo Vite, normalmente **http://localhost:5173**.
+Abra **http://localhost:5173**, ou o endereço indicado pelo terminal.
 
-```bash
-npm run build       # TypeScript estrito + bundle de produção em dist/
-npm run preview     # Visualizar o build, normalmente na porta 4173
-npm run typecheck   # Verificar tipos sem gerar arquivos
-```
-
-Para reproduzir exatamente as dependências do arquivo de lock, use `npm ci`.
-
-## Uma experiência do início ao apoio
-
-| Recurso | Comportamento |
+| Comando | Para que serve |
 | --- | --- |
-| Identidade urbana | Composição, texturas, mascotes e tipografia da versão original |
-| Navegação responsiva | Âncoras, menu mobile, fechamento com Escape e retorno de foco |
-| Tema claro e escuro | Preferência armazenada localmente, com fallback se o armazenamento estiver bloqueado |
-| Histórias da comunidade | Carrossel com setas, swipe e reprodução automática |
-| Transparência | Cartões animados no desktop e carrossel em telas menores |
-| Sugestões de contribuição | Seleção acessível e confirmação; o valor é escolhido novamente no Apoia.se |
-| FAQ | Acordeão com animação, teclado e estados acessíveis |
-| Movimento | Revelação por viewport, números animados e respeito a movimento reduzido |
+| `npm run dev` | Desenvolver com atualização automática no navegador |
+| `npm run build` | Verificar TypeScript e gerar a versão de produção em `dist/` |
+| `npm run preview` | Conferir o build localmente |
+| `npm run typecheck` | Verificar os tipos sem gerar arquivos |
+| `npm test` | Executar os testes de interface e regressão |
+| `npm run audit:dark` | Auditar contraste do tema escuro, com o servidor local ativo |
 
-## Organização
+Para instalar exatamente as versões do lockfile, use `npm ci`.
+
+## Por dentro do código
+
+**React** organiza as seções, **TypeScript** ajuda a manter as interações seguras e **Vite** cuida do desenvolvimento e do build. A aplicação é estática e não processa pagamentos.
 
 ```text
 src/
-├── components/           # Header, Hero, CommunityStrip, Journey, Impact,
-│                         # Testimonials, Transparency, Support, Faq, FinalCall, Footer
-├── hooks/                # Ciclo de vida e interações tipadas
-├── styles/               # CSS original, na mesma ordem de precedência
-├── App.tsx               # Composição da página
-└── main.tsx              # Entrada React com StrictMode
-public/assets/            # Logos, mascotes, texturas e imagens locais
-public/wireframe.html     # Material de referência recebido
-tests/                   # Regressão visual e fluxos de interação
-docs/                    # Arquitetura, edital, evidências e original de referência
+├── components/   # Uma seção por componente: Hero, Impact, Support, FAQ…
+├── hooks/        # Interações, animações e ciclo de vida
+├── styles/       # Layout, temas e refinamentos visuais
+├── App.tsx       # A página montada a partir das seções
+└── main.tsx      # Entrada da aplicação
+public/assets/    # Logos, mascotes, imagens e texturas locais
+tests/            # Fluxos, contraste e comparação visual
+docs/             # Decisões técnicas e evidências da entrega
 ```
 
-Leia as [decisões de arquitetura](docs/ARCHITECTURE.md) antes de alterar estilos ou animações.
+A base visual veio da página original, migrada para componentes React. As imagens que já eram locais continuam no projeto; fontes e fotografias originalmente externas mantêm suas referências.
 
-## Qualidade verificável
+Leia a [arquitetura](docs/ARCHITECTURE.md) para entender a ordem dos estilos, os efeitos e os cuidados ao evoluir cada seção.
+
+## Cuidado com os detalhes
+
+Os testes cobrem larguras de **390, 768 e 1440 px**, comparação com a página de referência, tema persistido, menu mobile, FAQ, contribuições e carrosséis. Há verificações específicas para contraste no tema escuro, hover, foco por teclado e movimento reduzido.
+
+Para executar:
 
 ```bash
 npx playwright install chromium
 npm test
 ```
 
-Os testes comparam a versão React ao HTML original em **390, 768 e 1440 px**: conteúdo, destinos, dimensões, ausência de overflow e diferença visual inferior a 0,5%. Também exercitam tema persistido, menu/Escape, contribuição, FAQ e carrosséis sob React StrictMode.
+As comparações visuais dependem das fontes e imagens externas. Os registros de [QA](docs/QA.md) e da [revisão do tema escuro](docs/DARK-MODE.md) detalham o que foi verificado e o que ainda precisa de avaliação manual.
 
-A comparação visual usa movimento reduzido para capturar estados estáveis. Os recursos externos precisam estar disponíveis para reproduzir as imagens e fontes. Isso não substitui auditoria manual de contraste, leitor de tela, zoom a 200% ou testes com usuários. Veja o [registro de validação](docs/QA.md).
+## Da nossa máquina para a Vercel
 
-## Publicação na Vercel
+O [site publicado](https://soujunior-apoia-se.vercel.app) usa o preset Vite, com `npm run build` e saída em `dist/`. Essas configurações estão em `vercel.json`.
 
-O arquivo `vercel.json` define o preset Vite, `npm run build` e a saída `dist`. Na Vercel, importe este repositório e mantenha essas configurações. Também é possível publicar pela CLI autenticada:
+Para publicar com a CLI autenticada:
 
 ```bash
 vercel --prod
 ```
 
-Nenhum segredo deve ser versionado. `.env*`, `.vercel`, `.openai`, dependências e builds estão ignorados.
+A configuração de GitHub Actions está disponível como [modelo](docs/github-actions-quality.yml), ainda sem ativação no repositório.
 
-## Hackathon: evidência antes de promessa
+## Construindo em equipe
 
-A [matriz do edital](docs/EDITAL.md) relaciona cada requisito à implementação e identifica o que depende de confirmação. Entre as pendências estão a fonte dos números de impacto, vídeo de até cinco minutos e evidências reais de colaboração. A existência das seções não comprova, por si só, todos os critérios de avaliação.
+Quer contribuir? Rode o projeto, escolha uma melhoria e abra uma branch. No pull request, conte o que mudou, por quê e como você conferiu o resultado. Capturas ajudam bastante quando a mudança é visual. Antes de enviar, execute o build e os testes e peça a revisão de outro integrante.
 
-## Como contribuir
+A [conferência do edital](docs/EDITAL.md) reúne os requisitos do hackathon e o checklist de entrega, incluindo vídeo e registros de participação.
 
-1. Configure o projeto seguindo este README e registre impedimentos reais do onboarding.
-2. Crie uma branch com uma mudança de escopo claro.
-3. Preserve conteúdo, links e layout; valide qualquer alteração editorial com o squad.
-4. Execute build e testes e abra um pull request com evidências.
-5. Solicite revisão de outro integrante e registre participação real, sem fabricar commits ou métricas.
+## Créditos
 
-## Créditos e licença
+- **SouJunior:** marca, campanha, retratos e informações fornecidas ao squad.
+- **Unsplash e Pexels:** fotografias referenciadas nos componentes.
+- **Google Fonts:** Funnel Display e Funnel Sans.
+- **Ferramentas:** React, TypeScript, Vite, Playwright, axe-core, Prettier, PNGJS e Pixelmatch.
 
-Código sob [licença MIT](LICENSE). Marcas, fotografias, retratos e outros materiais de terceiros continuam sujeitos aos direitos e termos de seus respectivos titulares; a licença do código não concede direitos sobre esses materiais.
+O código é distribuído sob a [licença MIT](LICENSE). Marcas e materiais de terceiros mantêm seus respectivos direitos e condições de uso.
 
-- Identidade, campanha e retratos: [SouJunior](https://www.soujunior.tech/).
-- Fotografias externas preservadas: Unsplash e Pexels (URLs nos componentes).
-- Tipografia externa preservada: Funnel Display e Funnel Sans, via Google Fonts.
-- Bibliotecas: React, Vite, TypeScript, Playwright, Prettier, PNGJS e Pixelmatch. Consulte as licenças das dependências distribuídas.
+<div align="center">
 
-**A página não coleta pagamentos nem envia os valores escolhidos.** O apoio é concluído exclusivamente no [Apoia.se da SouJunior](https://apoia.se/soujunior).
+**Mais pessoas. Mais oportunidades. Um futuro mais justo.**
+
+[Faça parte dessa história 💙](https://apoia.se/soujunior)
+
+</div>
